@@ -28,32 +28,8 @@ class HomePlayerWorker: HomePlayerWorkerProtocol {
     }
     
     func likePost(index: IndexPath, id: Int, completion: @escaping (Bool) -> Void) {
-        guard var videos = readLocalJSONFile(forName: "data") else {
-            completion(false)
-            return
-        }
-        
-        if let postIndex = videos.looks.firstIndex(where: { $0.id == id }) {
-            if !videos.looks[postIndex].liked {
-                videos.looks[postIndex].liked = true
-                videos.looks[postIndex].likesCount += 1
-                
-                do {
-                    let updatedJsonData = try JSONEncoder().encode(videos)
-                    try updatedJsonData.write(to: fileURLForDataJSON())
-                    
-                    print("Updated JSON data saved to Documents directory.")
-                    completion(true)
-                } catch {
-                    print(error.localizedDescription)
-                    completion(false)
-                }
-            } else {
-                completion(false)
-            }
-        } else {
-            completion(false)
-        }
+     // POST ON BACKEND
+        completion(true)
     }
     
     private func decodeVideoData(with data: Data) -> HomePlayerModel.LooksData? {
