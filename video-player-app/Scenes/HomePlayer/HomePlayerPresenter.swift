@@ -14,6 +14,7 @@ protocol HomePlayerPresenterProtocol: AnyObject {
     
     func presentScreenValues(with model: [HomePlayerModel.Look])
     func presentLiked(index: IndexPath, id: Int)
+    func presentProfile()
 }
 
 // MARK: - HomePlayerPresenter Implementation
@@ -34,5 +35,9 @@ class HomePlayerPresenter: HomePlayerPresenterProtocol {
     
     func presentLiked(index: IndexPath, id: Int) {
         controller?.displayLiked(index: index, id: id)
+    }
+    
+    func presentProfile() {
+        controller?.displayProfile()
     }
 }

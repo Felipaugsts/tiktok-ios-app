@@ -15,11 +15,17 @@ protocol UserProfileInteractorProtocol: AnyObject {
     func loadScreenValues()
 }
 
+protocol UserProfileDataStore {
+    var userSelected: HomePlayerModel.User? { get set }
+}
+
 // MARK: - UserProfileInteractor Implementation
 
-class UserProfileInteractor: UserProfileInteractorProtocol {
+class UserProfileInteractor: UserProfileInteractorProtocol, UserProfileDataStore {
     weak var presenter: UserProfilePresenterProtocol?
 
+    var userSelected: HomePlayerModel.User?
+    
     // MARK: - Initializer
     
     init() { }
@@ -27,6 +33,6 @@ class UserProfileInteractor: UserProfileInteractorProtocol {
     // MARK: - Public Methods
     
     func loadScreenValues() {
-        presenter?.presentScreenValues()
+        presenter?.presentScreenValues(with: userSelected)
     }
 }

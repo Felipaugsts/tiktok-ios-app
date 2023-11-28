@@ -10,7 +10,7 @@ import AVFoundation
 
 protocol VideoCollectionViewCellProtocol: AnyObject {
     func handleDoublePress(index: IndexPath, id: Int)
-    func didSwipeLeft()
+    func didSwipeLeft(index: IndexPath)
 }
 
 class VideoCollectionViewCell: UICollectionViewCell {
@@ -158,7 +158,8 @@ class VideoCollectionViewCell: UICollectionViewCell {
     
     @objc func handleSwipeLeft(_ gesture: UISwipeGestureRecognizer) {
         if gesture.state == .ended {
-            delegate?.didSwipeLeft()
+            guard let index = getIndexPath() else { return }
+            delegate?.didSwipeLeft(index: index)
             videoPlayer.pause()
             pausedIcon.isHidden = false
         }
@@ -264,16 +265,7 @@ class VideoCollectionViewCell: UICollectionViewCell {
                 return
             }
             
-            // Image downloaded successfully, return it in the completion handler
             completion(image)
         }.resume()
-    }
-    
-}
-
-extension UIImageView {
-    func makeRounded() {
-        self.layer.cornerRadius = self.frame.height / 2
-        self.clipsToBounds = true
     }
 }

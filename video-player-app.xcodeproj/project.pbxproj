@@ -24,6 +24,7 @@
 		C592816C2B16507800A8C8E9 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59281672B16507700A8C8E9 /* UserProfileViewController.swift */; };
 		C592816D2B16507800A8C8E9 /* UserProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59281682B16507700A8C8E9 /* UserProfileInteractor.swift */; };
 		C592816E2B16507800A8C8E9 /* UserProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59281692B16507700A8C8E9 /* UserProfileModel.swift */; };
+		C59281722B16563500A8C8E9 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59281712B16563500A8C8E9 /* UIImageView+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		C59281672B16507700A8C8E9 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		C59281682B16507700A8C8E9 /* UserProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileInteractor.swift; sourceTree = "<group>"; };
 		C59281692B16507700A8C8E9 /* UserProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileModel.swift; sourceTree = "<group>"; };
+		C59281712B16563500A8C8E9 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 		C59281322B15388E00A8C8E9 /* video-player-app */ = {
 			isa = PBXGroup;
 			children = (
+				C592816F2B16561C00A8C8E9 /* Utils */,
 				C59281592B15404C00A8C8E9 /* Components */,
 				C592814A2B15397D00A8C8E9 /* Data */,
 				C59281472B15391000A8C8E9 /* Infrasctructure */,
@@ -154,6 +157,22 @@
 				C59281692B16507700A8C8E9 /* UserProfileModel.swift */,
 			);
 			path = UserProfile;
+			sourceTree = "<group>";
+		};
+		C592816F2B16561C00A8C8E9 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				C59281702B16562400A8C8E9 /* Extension */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		C59281702B16562400A8C8E9 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				C59281712B16563500A8C8E9 /* UIImageView+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,6 +255,7 @@
 				C59281342B15388E00A8C8E9 /* AppDelegate.swift in Sources */,
 				C592816D2B16507800A8C8E9 /* UserProfileInteractor.swift in Sources */,
 				C592816B2B16507800A8C8E9 /* UserProfileRouter.swift in Sources */,
+				C59281722B16563500A8C8E9 /* UIImageView+Extension.swift in Sources */,
 				C592816C2B16507800A8C8E9 /* UserProfileViewController.swift in Sources */,
 				C59281562B153A3C00A8C8E9 /* HomePlayerInteractor.swift in Sources */,
 				C59281552B153A3C00A8C8E9 /* HomePlayerViewController.swift in Sources */,

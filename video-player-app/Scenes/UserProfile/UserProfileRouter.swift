@@ -15,14 +15,19 @@ protocol UserProfileRouterProtocol: AnyObject {
     func goToPlayerView()
 }
 
+protocol UserProfileDataPassing: AnyObject {
+    var dataStore: UserProfileDataStore? { get set}
+}
 // MARK: - UserProfileRouter Implementation
 
-class UserProfileRouter: UserProfileRouterProtocol {
+class UserProfileRouter: NSObject, UserProfileRouterProtocol, UserProfileDataPassing {
     weak var controller: UIViewController?
 
+    var dataStore: UserProfileDataStore?
+    
     // MARK: - Initializer
     
-    init() { }
+    override init() { }
     
     func goToPlayerView() {
         controller?.navigationController?.popViewController(animated: true)

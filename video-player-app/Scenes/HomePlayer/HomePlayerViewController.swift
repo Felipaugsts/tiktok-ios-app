@@ -12,6 +12,7 @@ import UIKit
 protocol HomePlayerViewControllerProtocol: AnyObject {
     func displayScreenValues(_ values: HomePlayerModel.ScreenValues)
     func displayLiked(index: IndexPath, id: Int)
+    func displayProfile()
 }
 
 class HomePlayerViewController: UIViewController {
@@ -42,15 +43,15 @@ class HomePlayerViewController: UIViewController {
     // MARK: - Variables
     
     var visibleIndexPaths = [IndexPath]()
-    var interactor: HomePlayerInteractorProtocol
+    var interactor: (HomePlayerInteractorProtocol & HomePlayerDataStore)
+    var router: (NSObjectProtocol & HomePlayerRouterProtocol & HomePlayerDataPassing)
     var presenter: HomePlayerPresenterProtocol
-    var router: HomePlayerRouterProtocol
     
     // MARK: - Initializer
     
-    init(interactor: HomePlayerInteractorProtocol = HomePlayerInteractor(),
+    init(interactor: (HomePlayerInteractorProtocol & HomePlayerDataStore) = HomePlayerInteractor(),
          presenter: HomePlayerPresenterProtocol = HomePlayerPresenter(),
-         router: HomePlayerRouterProtocol = HomePlayerRouter()) {
+         router: (NSObjectProtocol & HomePlayerRouterProtocol & HomePlayerDataPassing) = HomePlayerRouter()) {
         self.interactor = interactor
         self.presenter = presenter
         self.router = router
@@ -89,6 +90,7 @@ class HomePlayerViewController: UIViewController {
         interactor.presenter = presenter
         presenter.controller = self
         router.controller = self
+        router.dataStore = interactor
     }
     
     private func addSubviews() {
@@ -161,7 +163,13 @@ extension HomePlayerViewController: VideoCollectionViewCellProtocol {
         interactor.didLikePost(index: index, id: id)
     }
     
-    func didSwipeLeft() {
+    func didSwipeLeft(index: IndexPath) {
+        let cell = data[index.row]
+
+        interactor.openUserProfile(with: cell)
+    }
+    
+    func displayProfile() {
         router.routeToUserProfile()
     }
 }

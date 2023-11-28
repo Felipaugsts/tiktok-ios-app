@@ -36,6 +36,12 @@ enum HomePlayerModel {
 
         }
     }
+    
+    struct User: Codable {
+        var id: Int
+        var profilePictureURL: String
+        var username: String
+    }
 
     struct LooksData: Codable {
         var looks: [Look]

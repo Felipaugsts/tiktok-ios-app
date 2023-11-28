@@ -17,18 +17,18 @@ protocol UserProfileViewControllerProtocol: AnyObject {
 
 class UserProfileViewController: UIViewController {
     
-    var interactor: UserProfileInteractorProtocol
     var presenter: UserProfilePresenterProtocol
-    var router: UserProfileRouterProtocol
+    var interactor: (UserProfileInteractorProtocol & UserProfileDataStore)
+    var router: (NSObjectProtocol & UserProfileRouterProtocol & UserProfileDataPassing)
     
     var userprofileLabel: UILabel = {
         let label = UILabel()
         return label
     }()
     
-    init(interactor: UserProfileInteractorProtocol = UserProfileInteractor(),
+    init(interactor: (UserProfileInteractorProtocol & UserProfileDataStore) = UserProfileInteractor(),
          presenter: UserProfilePresenterProtocol = UserProfilePresenter(),
-         router: UserProfileRouterProtocol = UserProfileRouter()) {
+         router: (NSObjectProtocol & UserProfileRouterProtocol & UserProfileDataPassing) = UserProfileRouter()) {
         self.interactor = interactor
         self.presenter = presenter
         self.router = router
@@ -49,7 +49,7 @@ class UserProfileViewController: UIViewController {
         interactor.loadScreenValues()
         
         view.addSubview(userprofileLabel)
-        userprofileLabel.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
+        userprofileLabel.frame = CGRect(x: 0, y: 0, width: view.frame.width / 2, height: 50)
         userprofileLabel.center = CGPoint(x: view.bounds.midX, y: view.bounds.midY)
         
         swipeLeft()
@@ -59,6 +59,7 @@ class UserProfileViewController: UIViewController {
         interactor.presenter = presenter
         presenter.controller = self
         router.controller = self
+        router.dataStore = interactor
     }
     
     private func swipeLeft() {

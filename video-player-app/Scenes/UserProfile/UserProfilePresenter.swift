@@ -12,7 +12,7 @@ import UIKit
 protocol UserProfilePresenterProtocol: AnyObject {
     var controller: UserProfileViewControllerProtocol? { get set }
     
-    func presentScreenValues()
+    func presentScreenValues(with user: HomePlayerModel.User?)
 }
 
 // MARK: - UserProfilePresenter Implementation
@@ -26,8 +26,10 @@ class UserProfilePresenter: UserProfilePresenterProtocol {
     
     // MARK: - Public Methods
     
-    func presentScreenValues() {
-        let values = UserProfileModel.ScreenValues(example: "User Profile")
-        controller?.displayScreenValues(values)
+    func presentScreenValues(with user: HomePlayerModel.User?) {
+        if let username = user?.username {
+            let values = UserProfileModel.ScreenValues(example: "User Profile, \(username)")
+            controller?.displayScreenValues(values)
+        }
     }
 }

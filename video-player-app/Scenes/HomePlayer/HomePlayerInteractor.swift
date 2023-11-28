@@ -14,16 +14,21 @@ protocol HomePlayerInteractorProtocol: AnyObject {
     
     func loadScreenValues()
     func didLikePost(index: IndexPath, id: Int)
+    func openUserProfile(with user: HomePlayerModel.Look)
+}
+
+protocol HomePlayerDataStore {
+    var userSelected: HomePlayerModel.User? { get set }
 }
 
 // MARK: - HomePlayerInteractor Implementation
 
-class HomePlayerInteractor: HomePlayerInteractorProtocol {
+class HomePlayerInteractor: HomePlayerInteractorProtocol, HomePlayerDataStore {
     
     var worker: HomePlayerWorkerProtocol
     
     weak var presenter: HomePlayerPresenterProtocol?
-
+    var userSelected: HomePlayerModel.User?
     // MARK: - Initializer
     
     init(worker: HomePlayerWorkerProtocol = HomePlayerWorker()) {
@@ -45,5 +50,10 @@ class HomePlayerInteractor: HomePlayerInteractorProtocol {
                 self.presenter?.presentLiked(index: index, id: id)
             }
         }
+    }
+    
+    func openUserProfile(with user: HomePlayerModel.Look) {
+        userSelected = HomePlayerModel.User(id: user.id, profilePictureURL: user.profilePictureURL, username: user.username)
+        presenter?.presentProfile()
     }
 }

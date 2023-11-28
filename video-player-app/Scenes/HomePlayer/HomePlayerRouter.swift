@@ -15,17 +15,27 @@ protocol HomePlayerRouterProtocol: AnyObject {
     func routeToUserProfile()
 }
 
+protocol HomePlayerDataPassing: AnyObject {
+    var dataStore: HomePlayerDataStore? { get set}
+}
+
 // MARK: - HomePlayerRouter Implementation
 
-class HomePlayerRouter: HomePlayerRouterProtocol {
+class HomePlayerRouter: NSObject, HomePlayerRouterProtocol, HomePlayerDataPassing {
     weak var controller: UIViewController?
-
+    var dataStore: HomePlayerDataStore?
     // MARK: - Initializer
     
-    init() { }
+    override init() { }
     
     func routeToUserProfile() {
         let destination = UserProfileViewController()
+        var destinationDS = destination.router.dataStore
+        passDataToProfile(dataStore: dataStore, destinationDS: &destinationDS)
         controller?.navigationController?.pushViewController(destination, animated: true)
+    }
+    
+    private func passDataToProfile(dataStore: HomePlayerDataStore?, destinationDS: inout UserProfileDataStore?) {
+        destinationDS?.userSelected = dataStore?.userSelected
     }
 }
